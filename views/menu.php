@@ -26,14 +26,43 @@
                 <li class="nav-item dropdown navbar-right">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-people-fill"></i> Usuarios
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" href="<?=PATH?>">Registrar usuario</a></li>
+                        <li><a class="dropdown-item" href="<?=PATH?>">Listado de usuarios</a></li>
+                        <li><a class="dropdown-item" href="<?=PATH?>">Listado de clientes</a></li>
+                        <li><a class="dropdown-item" href="<?=PATH?>">Usuarios deshabilitados</a></li>
+                        <li><a class="dropdown-item" href="<?=PATH?>">Clientes deshabilitados</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown navbar-right">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-box2-heart-fill"></i> Productos
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <li><a class="dropdown-item" href="<?=PATH?>/Productos">Ver lista</a></li>
-                        <li><a class="dropdown-item" href="<?=PATH?>">Registrar producto</a></li>
+                        <li><a class="dropdown-item" href="<?=PATH?>/Productos/Listado">Listados</a></li>
+                        <li><a class="dropdown-item" href="<?=PATH?>/Productos/Create">Insertar producto</a></li>
+                        <li><a class="dropdown-item" href="<?=PATH?>/Productos/Descontinuados">Descontinuados</a></li>
                     </ul>
-                </li>            
-                </ul>
+                </li>      
+                <li class="nav-item dropdown navbar-right">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-diagram-2-fill"></i> Categorias
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" href="<?=PATH?>/Categorias">Ver lista</a></li>
+                        <li><a class="dropdown-item" href="<?=PATH?>/Categorias/Descontinuados">Descontinuadas</a></li>
+                        <?php
+                                    foreach($categorias as $categoria){
+                                ?>
+                                 <li><a class="dropdown-item" href="<?=PATH?>/Productos/categoria/<?=$categoria['nombre_categoria']?>"><?=$categoria['nombre_categoria']?></a></li>
+                                <?php }?>
+                    </ul>
+                </li>      
             </div>
         </div>
     </nav>

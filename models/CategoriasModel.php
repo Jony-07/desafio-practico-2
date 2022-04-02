@@ -6,20 +6,29 @@ class CategoriasModel extends ModelPDO{
         $query = '';
         if($id==''){
             // retornar todos
-            $query="SELECT * FROM categoria";
+            $query="SELECT * FROM categoria WHERE estado_categoria='1'";
         }
         else{
             //Retorno por llave primaria
-            $query= "SELECT * FROM categoria WHERE id_categoria=:id_categoria";
+            $query= "SELECT * FROM categoria WHERE id_categoria=:id_categoria AND estado_categoria='1'";
         }
+        return $this->get_query($query,[":id_categoria"=>$id]);
+    }
+    public function getDescontinuados($id=''){
+        $query = '';     // retornar todos
+            $query="SELECT * FROM categoria WHERE estado_categoria='0'";
         return $this->get_query($query,[":id_categoria"=>$id]);
     }
     public function create($arreglo=array()){
         $query="INSERT INTO categoria(id_categoria, nombre_categoria) VALUES (:id_categoria, :nombre_categoria)";
         return $this->set_query($query,$arreglo);
     }
+    public function updateStatus($id=''){
+        $query = "UPDATE categoria SET estado_categoria='1' WHERE id_categoria =:id_categoria ";
+        return $this->set_query($query,[":id_categoria"=>$id]);
+    }
     public function delete($id=''){
-        $query = "DELETE FROM categoria WHERE id_categoria =:id_categoria ";
+        $query = "UPDATE categoria SET estado_categoria='0' WHERE id_categoria =:id_categoria ";
         return $this->set_query($query,[":id_categoria"=>$id]);
     }
     public function  update($libro=array()){

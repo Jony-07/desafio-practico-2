@@ -11,7 +11,10 @@ class IndexController extends Controller {
 
     public function Index()
     {
-        $this->render("index.php");
+        $categoriasModel = new CategoriasModel();
+        $viewBag = array();
+        $viewBag['categorias']=$categoriasModel->get();
+        $this->render("index.php",$viewBag);
     }
 }
 

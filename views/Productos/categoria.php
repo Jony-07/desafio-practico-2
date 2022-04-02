@@ -1,4 +1,5 @@
-<?php require_once 'core/config.php';?>
+<?php require_once 'core/config.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,8 +30,6 @@
                    
                     foreach ($productos as $producto)
                      {
-                        if($producto['estado_categoria']==1)
-                        {
                          $imagen=$producto['imagen'];
                         $path="img/".$imagen;
                         if(file_exists($path))
@@ -66,7 +65,7 @@
 
             <?php
                         }
-                    }  
+                             
                     }
                     ?>
                     <script src="<?=PATH?>/views/assets/js/search.js"></script>
