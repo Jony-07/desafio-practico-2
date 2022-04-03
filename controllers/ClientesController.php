@@ -12,7 +12,17 @@ require_once "./models/CategoriasModel.php";
         }
         public function index()
         {
-        var_dump($this->modelo->get());
+          if(!isset($_SESSION['login_buffer']))
+          {
+           header("Location: ".PATH."/Usuarios/login") ;   
+          }
+          else{
+              if($_SESSION['login_buffer']['id_tipo_usuario']==1){
+                header('Location: '.PATH);
+      }   else{
+        header("Location: ".PATH."/Index/Default") ;
+    }
+  }
         }
 
         public function Update($id)
@@ -37,6 +47,12 @@ require_once "./models/CategoriasModel.php";
 
         public function Actualizar($id)
         {
+          if(!isset($_SESSION['login_buffer']))
+            {
+             header("Location: ".PATH."/Usuarios/login") ;   
+            }
+            else{
+                if($_SESSION['login_buffer']['id_tipo_usuario']==1){
             $estadosModel = new EstadosModel();
             $viewBag = array();
             $categoriasModel = new CategoriasModel();
@@ -44,15 +60,29 @@ require_once "./models/CategoriasModel.php";
             $viewBag['categorias']=$categoriasModel->get();
             $viewBag['clientes']=$this->modelo->get($id);
             $this->render("edit.php",$viewBag);
+          }   else{
+            header("Location: ".PATH."/Index/Default") ;
+        }
+    }
         }
 
         public function Estado($cat)
         {
+          if(!isset($_SESSION['login_buffer']))
+            {
+             header("Location: ".PATH."/Usuarios/login") ;   
+            }
+            else{
+                if($_SESSION['login_buffer']['id_tipo_usuario']==1){
             $categoriasModel = new CategoriasModel();
             $viewBag = array();
             $viewBag['clientes']=$this->modelo->getStatus($cat);
             $viewBag['categorias']=$categoriasModel->get();
             $this->render("index.php",$viewBag);
+          }   else{
+            header("Location: ".PATH."/Index/Default") ;
+        }
+    }
         }
 
         public function signin()
@@ -68,7 +98,7 @@ require_once "./models/CategoriasModel.php";
             $categoriasModel = new CategoriasModel();
             $viewBag = array();
             $viewBag['categorias']=$categoriasModel->get();
-            $viewBag['clientes']=$this->modelo->get('01234567-4');
+            $viewBag['clientes']=$this->modelo->get($_SESSION['login_buffer']['codigo_cliente']);
             $this->render("editme.php",$viewBag);
 
         }
@@ -132,7 +162,7 @@ require_once "./models/CategoriasModel.php";
                    $viewBag['errores']=$errores;
                    $categoriasModel = new CategoriasModel();
                    $viewBag['categorias']=$categoriasModel->get();
-                   $viewBag['clientes']=$this->modelo->get('01234567-4');
+                   $viewBag['clientes']=$this->modelo->get($_SESSION['login_buffer']['codigo_cliente']);
                    $this->render("editme.php",$viewBag);    
                 }
                 else{
@@ -152,7 +182,7 @@ require_once "./models/CategoriasModel.php";
                             {
                                 array_push($errores,"No se ha podido efectuar ninguna actualización");
                             $viewBag['errores']=$errores;
-                            $viewBag['clientes']=$this->modelo->get('01234567-4');
+                            $viewBag['clientes']=$this->modelo->get($_SESSION['login_buffer']['codigo_cliente']);
                             $categoriasModel = new CategoriasModel();
                             $viewBag['categorias']=$categoriasModel->get();
                               $this->render("editme.php",$viewBag);

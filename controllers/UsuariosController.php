@@ -250,6 +250,14 @@ require_once "./models/ClientesModel.php";
             }
         }
 
+        public function Logout()
+        {
+            $categoriasModel = new CategoriasModel();
+            $viewBag['categorias']=$categoriasModel->get();
+            session_unset();
+            session_destroy();
+            header('Location: '.PATH);
+        }
         public function Login()
         {
             $categoriasModel = new CategoriasModel();
@@ -284,12 +292,16 @@ require_once "./models/ClientesModel.php";
                     $login_buffer=$this->modelo->ValidateAccess($usuario,$clave);
                 if(count($login_buffer)>0)
                 {
+                    session_start();
+                    $_SESSION['login_buffer']=$login_buffer[0];
+                    header('Location: '.PATH);
                     
                 }
                 else{
                     array_push($errores,"Cuenta deshabilitada/no verificada");
                     $viewBag['errores']=$errores;
                     $this->render("login.php",$viewBag);
+                      header('Location: '.PATH);
                 }
                 }
                 else{
@@ -300,7 +312,9 @@ require_once "./models/ClientesModel.php";
                         $login_buffer=$clientesModel->ValidateAccessCliente($usuario,$clave);
                         if(count($login_buffer)>0)
                         {
-
+                            session_start();
+                            $_SESSION['login_buffer']=$login_buffer[0];
+                            header('Location: '.PATH);
                         }
                         else{
                             array_push($errores,"Cuenta deshabilitada/no verificada");
@@ -319,6 +333,13 @@ require_once "./models/ClientesModel.php";
         }
         public function Actualizar($id)
         {
+
+            if(!isset($_SESSION['login_buffer']))
+            {
+             header("Location: ".PATH."/Usuarios/login") ;   
+            }
+            else{
+                if($_SESSION['login_buffer']['id_tipo_usuario']==1){
             $TUModel = new TipoUsuarioModel();
             $estadosModel = new EstadosModel();
             $viewBag = array();
@@ -328,6 +349,10 @@ require_once "./models/ClientesModel.php";
             $viewBag['tipo_usuarios']=$TUModel->get();
             $viewBag['usuarios']=$this->modelo->get($id);
             $this->render("edit.php",$viewBag);
+        }   else{
+            header("Location: ".PATH."/Index/Default") ;
+        }
+    }
         }
 
         public function Update($id)
@@ -353,6 +378,12 @@ require_once "./models/ClientesModel.php";
 
         public function Estado($cat)
         {
+            if(!isset($_SESSION['login_buffer']))
+            {
+             header("Location: ".PATH."/Usuarios/login") ;   
+            }
+            else{
+                if($_SESSION['login_buffer']['id_tipo_usuario']==1){
 
             $categoriasModel = new CategoriasModel();
             $viewBag = array();
@@ -360,15 +391,29 @@ require_once "./models/ClientesModel.php";
             $viewBag['usuarios']=$this->modelo->getStatus($cat);
             $viewBag['categorias']=$categoriasModel->get();
             $this->render("index.php",$viewBag);
+        }   else{
+            header("Location: ".PATH."/Index/Default") ;
+        }
+    }
         }
         public function Signin()
         {
+            if(!isset($_SESSION['login_buffer']))
+            {
+             header("Location: ".PATH."/Usuarios/login") ;   
+            }
+            else{
+                if($_SESSION['login_buffer']['id_tipo_usuario']==1){
         $tipousuarioModel = new TipoUsuarioModel();
         $viewBag = array();
          $categoriasModel = new CategoriasModel();
         $viewBag['categorias']=$categoriasModel->get();
         $viewBag['tipo_usuarios']=$tipousuarioModel->get();
         $this->render("registrar.php",$viewBag);
+    }   else{
+        header("Location: ".PATH."/Index/Default") ;
+    }
+}
         }
         public function Edit()
         {
@@ -378,7 +423,7 @@ require_once "./models/ClientesModel.php";
             $categoriasModel = new CategoriasModel();
             $viewBag['categorias']=$categoriasModel->get();
             $viewBag['tipo_usuarios']=$TUModel->get();
-            $viewBag['usuarios']=$this->modelo->get('U238');
+            $viewBag['usuarios']=$this->modelo->get($_SESSION['login_buffer']['codigo_usuario']);
             $this->render("editme.php",$viewBag);
 
         }
@@ -427,7 +472,7 @@ require_once "./models/ClientesModel.php";
                    $categoriasModel = new CategoriasModel();
                    $viewBag['categorias']=$categoriasModel->get();
                    $viewBag['tipo_usuarios']=$TUModel->get();
-                   $viewBag['usuarios']=$this->modelo->get('U238');
+                   $viewBag['usuarios']=$this->modelo->get($_SESSION['login_buffer']['codigo_usuario']);
                    $this->render("editme.php",$viewBag);    
                 }
                 else
@@ -435,7 +480,7 @@ require_once "./models/ClientesModel.php";
                 if(!isset($clave)||estaVacio($clave))
                 {
                     $usuario['codigo_usuario']=$codigo_usuario;
-                    $usuario['nickname']=$nickname;
+                    $usuario['nombre']=$nickname;
                     $usuario['correo']=$correo;           
                     $usuario['telefono']=$telefono;
 
@@ -447,7 +492,7 @@ require_once "./models/ClientesModel.php";
                             $viewBag['errores']=$errores;
                             $categoriasModel = new CategoriasModel();
                             $viewBag['categorias']=$categoriasModel->get();
-                            $viewBag['usuarios']=$this->modelo->get('U238');
+                            $viewBag['usuarios']=$this->modelo->get($_SESSION['login_buffer']['codigo_usuario']);
                             $TUModel = new TipoUsuarioModel();
                             $viewBag['tipo_usuarios']=$TUModel->get();
                             $this->render("editme.php",$viewBag);
@@ -461,7 +506,7 @@ require_once "./models/ClientesModel.php";
                     {   
                         
                         $usuario['codigo_usuario']=$codigo_usuario;
-                        $usuario['nickname']=$nickname;
+                        $usuario['nombre']=$nickname;
                         $usuario['clave']=hash('sha256',$clave);
                         $usuario['correo']=$correo;           
                         $usuario['telefono']=$telefono;
@@ -546,7 +591,7 @@ require_once "./models/ClientesModel.php";
                 }
                
                 $usuario['codigo_usuario']=$codigo_usuario;
-                $usuario['nickname']=$nickname;
+                $usuario['nombre']=$nickname;
                 $usuario['clave']=hash('sha256',$clave);
                 $usuario['hash_active']=md5(rand(1,1000));
                 $usuario['id_tipo_usuario']=$id_tipo_usuario;

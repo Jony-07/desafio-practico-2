@@ -3,19 +3,19 @@ require_once "ConexionModel.php";
 class UsuariosModel extends ModelPDO{
     public function ValidateUser($correo,$clave)
     {
-        $query = "SELECT nickname,id_tipo_usuario,correo FROM usuario WHERE correo=:correo AND clave=SHA2(:clave,256);";
+        $query = "SELECT nombre,id_tipo_usuario,correo FROM usuario WHERE correo=:correo AND clave=SHA2(:clave,256);";
         return $this->get_query($query,[":correo"=>$correo,":clave"=>$clave]);
     }
 
     public function ValidateU($correo,$clave)
     {
-        $query = "SELECT nickname,id_tipo_usuario,correo FROM usuario WHERE correo=:correo AND hash_active=:hash_active;";
+        $query = "SELECT nombre,id_tipo_usuario,correo FROM usuario WHERE correo=:correo AND hash_active=:hash_active;";
         return $this->get_query($query,[":correo"=>$correo,":hash_active"=>$clave]);
     }
 
     public function ValidateAccess($correo,$clave)
     {
-        $query = "SELECT nickname,id_tipo_usuario,correo FROM usuario WHERE correo=:correo AND clave=SHA2(:clave,256)
+        $query = "SELECT codigo_usuario,nombre,id_tipo_usuario,correo FROM usuario WHERE correo=:correo AND clave=SHA2(:clave,256)
         AND verificado='1' AND id_estado='1';";
         return $this->get_query($query,[":correo"=>$correo,":clave"=>$clave]);
     }
@@ -24,19 +24,19 @@ class UsuariosModel extends ModelPDO{
 
     public function DataActive($correo)
     {
-        $query = "SELECT nickname,hash_active,id_tipo_usuario,correo FROM usuario WHERE correo=:correo";
+        $query = "SELECT nombre,hash_active,id_tipo_usuario,correo FROM usuario WHERE correo=:correo";
         return $this->get_query($query,[":correo"=>$correo]);
     }
     public function Validate($correo)
     {
-        $query = "SELECT nickname,hash_active,id_tipo_usuario,correo FROM usuario WHERE correo=:correo
+        $query = "SELECT nombre,hash_active,id_tipo_usuario,correo FROM usuario WHERE correo=:correo
         AND verificado='0';";
         return $this->get_query($query,[":correo"=>$correo]);
     }
 
     public function ValidateVerificate($correo)
     {
-        $query = "SELECT nickname,hash_active,id_tipo_usuario,correo FROM usuario WHERE correo=:correo
+        $query = "SELECT nombre,hash_active,id_tipo_usuario,correo FROM usuario WHERE correo=:correo
         AND verificado='1';";
         return $this->get_query($query,[":correo"=>$correo]);
     }
@@ -69,7 +69,7 @@ class UsuariosModel extends ModelPDO{
         return $this->get_query($query,[":nombre_estado"=>$id]);
     }
     public function create($arreglo=array()){
-        $query="INSERT INTO usuario(codigo_usuario, nickname, clave, hash_active, id_tipo_usuario, correo, telefono) VALUES (:codigo_usuario, :nickname, :clave, :hash_active, :id_tipo_usuario , :correo, :telefono)";
+        $query="INSERT INTO usuario(codigo_usuario, nombre, clave, hash_active, id_tipo_usuario, correo, telefono) VALUES (:codigo_usuario, :nombre, :clave, :hash_active, :id_tipo_usuario , :correo, :telefono)";
         return $this->set_query($query,$arreglo);
     }
     public function delete($id=''){
@@ -78,7 +78,7 @@ class UsuariosModel extends ModelPDO{
     }
     public function  update($arreglo=array()){
         extract($arreglo);
-        $query = "UPDATE usuario SET nickname=:nickname, clave=:clave, correo=:correo, telefono=:telefono WHERE codigo_usuario=:codigo_usuario";
+        $query = "UPDATE usuario SET nombre=:nombre, clave=:clave, correo=:correo, telefono=:telefono WHERE codigo_usuario=:codigo_usuario";
         return $this->set_query($query,$arreglo);
     }
 
@@ -90,7 +90,7 @@ class UsuariosModel extends ModelPDO{
 
     public function  updateNonPass($arreglo=array()){
         extract($arreglo);
-        $query = "UPDATE usuario SET nickname=:nickname, correo=:correo, telefono=:telefono WHERE codigo_usuario=:codigo_usuario";
+        $query = "UPDATE usuario SET nombre=:nombre, correo=:correo, telefono=:telefono WHERE codigo_usuario=:codigo_usuario";
         return $this->set_query($query,$arreglo);
     }
 

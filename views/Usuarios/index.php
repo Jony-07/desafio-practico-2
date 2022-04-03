@@ -31,7 +31,7 @@
                             <th>Nickname</th>
                             <th>Telefono</th>
                             <th>Correo</th>
-                            <th>Tipo Usuario</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -43,10 +43,10 @@
                       
                    ?>
                         <tr < id="id_<?=$usuario['codigo_usuario']?>">
-                            <td><?=$usuario['nickname']?></td>
+                            <td><?=$usuario['codigo_usuario']?></td>
+                            <td><?=$usuario['nombre']?></td>
                             <td><?=$usuario['telefono']?></td>
                             <td><?=$usuario['correo']?></td>
-                            <td><?=$usuario['nombre_tipo_usuario']?></td>
 
                             <td>
                                 <center>

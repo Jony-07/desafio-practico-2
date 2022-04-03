@@ -55,11 +55,11 @@
                     <div class="form-group mx-sm-3 text-center">
                     <input type="submit" class="btn btn-dark" style="background-color:#343a40 ;color:white" value="Ingresar" name="Ingresar"> 
                     </div>
-                    <div class="form-group mx-sm-3 text-center my-3">
+       <!--             <div class="form-group mx-sm-3 text-center my-3">
                   
                             <span class=""  style="color: #343a40;"><a  style="color: #343a40;" href="" class="olvide">¿Olvide mi
                                     contraseña?</a></span>
-                    </div>
+                    </div>-->
 
 
 

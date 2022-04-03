@@ -13,6 +13,7 @@ require_once "core/validaciones.php";
         }
         public function index()
         {
+            
             $categoriasModel = new CategoriasModel();
             $viewBag = array();
             $viewBag['categorias']=$categoriasModel->get();
@@ -20,31 +21,65 @@ require_once "core/validaciones.php";
             $this->render("index.php",$viewBag);
         }
 
+
         public function listado()
         {
+            if(!isset($_SESSION['login_buffer']))
+            {
+             header("Location: ".PATH."/Usuarios/login") ;   
+            }
+            else{
+                if($_SESSION['login_buffer']['id_tipo_usuario']!=3){
             $categoriasModel = new CategoriasModel();
             $viewBag = array();
             $viewBag['categorias']=$categoriasModel->get();
             $viewBag['productos']=$this->modelo->get();
             $this->render("list.php",$viewBag);
+                }
+            else{
+                header("Location: ".PATH."/Index/Default") ;
+            }
+        }
         }
 
         public function Descontinuados()
         {
+            if(!isset($_SESSION['login_buffer']))
+            {
+             header("Location: ".PATH."/Usuarios/login") ;   
+            }
+            else{
+                if($_SESSION['login_buffer']['id_tipo_usuario']==1){
             $categoriasModel = new CategoriasModel();
             $viewBag = array();
             $viewBag['categorias']=$categoriasModel->get();
             $viewBag['productos']=$this->modelo->getDescontinuados();
             $this->render("descontinuados.php",$viewBag);
+            }
+            else{
+                header("Location: ".PATH."/Index/Default") ;
+            }
+        }
         }
 
         public function create()
         {
+            if(!isset($_SESSION['login_buffer']))
+            {
+             header("Location: ".PATH."/Usuarios/login") ;   
+            }
+            else{
+                if($_SESSION['login_buffer']['id_tipo_usuario']!=3){
             $categoriasModel = new CategoriasModel();
             $viewBag = array();
             $viewBag['productos']=$this->modelo->get();
             $viewBag['categorias']=$categoriasModel->get();
             $this->render("new.php",$viewBag);
+                }
+                else{
+                    header("Location: ".PATH."/Index/Default") ;
+                }
+            }
         }
 
         public function categoria($cat)
@@ -61,10 +96,20 @@ require_once "core/validaciones.php";
             $id = empty($url[4])?'':$url[4];
             if(isset($id))
             {
+                if(!isset($_SESSION['login_buffer']))
+            {
+             header("Location: ".PATH."/Usuarios/login") ;   
+            }
+            else{
+                if($_SESSION['login_buffer']['id_tipo_usuario']!=3){
             $categoriasModel = new CategoriasModel();
             $viewBag['categorias']=$categoriasModel->get();
             $viewBag['productos']=$this->modelo->get($id);
             $this->render("edit.php",$viewBag);
+                }   else{
+                    header("Location: ".PATH."/Index/Default") ;
+                }
+            }
         }
 
         
@@ -78,10 +123,20 @@ require_once "core/validaciones.php";
         $id = empty($url[4])?'':$url[4];
         if(isset($id))
         {
+            if(!isset($_SESSION['login_buffer']))
+            {
+             header("Location: ".PATH."/Usuarios/login") ;   
+            }
+            else{
+                if($_SESSION['login_buffer']['id_tipo_usuario']!=3){
         $categoriasModel = new CategoriasModel();
         $viewBag['categorias']=$categoriasModel->get();
         $viewBag['productos']=$this->modelo->get($id);
         $this->render("delete.php",$viewBag);
+    }   else{
+        header("Location: ".PATH."/Index/Default") ;
+    }
+}
     }    
 }
 
@@ -91,12 +146,23 @@ public function Recuperar()
         $id = empty($url[4])?'':$url[4];
         if(isset($id))
         {
+            if(!isset($_SESSION['login_buffer']))
+            {
+             header("Location: ".PATH."/Usuarios/login") ;   
+            }
+            else{
+                if($_SESSION['login_buffer']['id_tipo_usuario']==1){
         $categoriasModel = new CategoriasModel();
         $viewBag['categorias']=$categoriasModel->get();
         $viewBag['productos']=$this->modelo->get($id);
         $viewBag['productos']=$this->modelo->getDescontinuados($id);
         $this->render("recuperar.php",$viewBag);
         }
+        else{
+            header("Location: ".PATH."/Index/Default") ;
+        }
+    }
+}
 }
 
 public function Recover()
@@ -119,6 +185,10 @@ public function Recover()
         }
         public function Detalles($id)
         {
+            if(!isset($_SESSION['login_buffer']))
+            {
+             header("Location: ".PATH."/Usuarios/login") ;   
+            }
             $categoriasModel = new CategoriasModel();
             $viewBag['categorias']=$categoriasModel->get();
             $viewBag['productos']=$this->modelo->get($id);

@@ -35,7 +35,7 @@
                    }
                    ?>
 
-                             <legend style="color:#084594" class="text-center text-dark">Usuario <?=$usuario['nickname']?></legend>
+                             <legend style="color:#084594" class="text-center text-dark">Usuario <?=$usuario['nombre']?></legend>
                     <table class="table table-borderless">
                         <thead>
 
@@ -56,13 +56,14 @@
                                         <select class="form-select" name="id_tipo_usuario" id="id_tipo_usuario" aria-label="Floating label select example">
                                         <?php
                                     foreach($tipo_usuarios as $tipo_usuario){
+                                        if($tipo_usuario['id_tipo_usuario']!='Cliente'){
                                         if($tipo_usuario['nombre_tipo_usuario']==$usuario['nombre_tipo_usuario'])
                                         {
                                 ?>
                                     <option selected value="<?=$tipo_usuario['id_tipo_usuario']?>"><?=$tipo_usuario['nombre_tipo_usuario']?></option>
                                     <?php } else{ ?>
                                         <option value="<?=$tipo_usuario['id_tipo_usuario']?>"><?=$tipo_usuario['nombre_tipo_usuario']?></option>
-                                    <?php }} ?>  
+                                    <?php } }} ?>  
                                         </select>
                                       
                                     </div>
@@ -74,7 +75,7 @@
                                     <div class="form-group mx-sm-4 pt-3">
                                         <label for="nickname" class="form-label">Nickname</label>
                                         <input readonly type="text" class="form-control" placeholder="Ingrese su nombre"
-                                            name="nickname" id="nickname" value="<?=isset($usuario)?$usuario['nickname']:''?>"">
+                                            name="nickname" id="nickname" value="<?=isset($usuario)?$usuario['nombre']:''?>"">
                                     </div>
                                 </td>
                                 <td></td>

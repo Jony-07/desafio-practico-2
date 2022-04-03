@@ -69,7 +69,7 @@
                                     <div class="form-group mx-sm-4 pt-3">
                                         <label for="nickname" class="form-label">Nombre</label>
                                         <input type="text" class="form-control" placeholder="Ingrese su nombre"
-                                            name="nickname" id="nickname" value="<?=isset($usuario)?$usuario['nickname']:''?>"">
+                                            name="nickname" id="nickname" value="<?=isset($usuario)?$usuario['nombre']:''?>"">
                                     </div>
                                 </td>
                                 <td></td>

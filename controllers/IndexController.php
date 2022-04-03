@@ -6,7 +6,6 @@ class IndexController extends Controller {
 
     public function __construct()
     {
-        
     }
 
     public function Index()
@@ -15,6 +14,14 @@ class IndexController extends Controller {
         $viewBag = array();
         $viewBag['categorias']=$categoriasModel->get();
         $this->render("index.php",$viewBag);
+    }
+
+    public function Default()
+    {
+        $categoriasModel = new CategoriasModel();
+        $viewBag = array();
+        $viewBag['categorias']=$categoriasModel->get();
+        $this->render("default.php",$viewBag);
     }
 }
 

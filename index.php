@@ -19,5 +19,6 @@ $controller=$router->controller;
 $method=$router->method;
 $param=$router->param;
 $param2=$router->param2;
+session_start();
 $controller=new $controller;
 $controller->$method($param,$param2);

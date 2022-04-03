@@ -15,7 +15,7 @@ class ClientesModel extends ModelPDO{
     }
     public function ValidateAccessCliente($correo,$clave)
     {
-        $query = "SELECT nombre, apellido,correo FROM cliente WHERE correo=:correo AND clave=SHA2(:clave,256)
+        $query = "SELECT codigo_cliente,nombre, apellido,correo,id_tipo_usuario FROM cliente WHERE correo=:correo AND clave=SHA2(:clave,256)
         AND verificado='1' AND id_estado='1';";
         return $this->get_query($query,[":correo"=>$correo,":clave"=>$clave]);
     }
