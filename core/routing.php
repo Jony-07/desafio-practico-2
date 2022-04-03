@@ -13,6 +13,7 @@
             $this->controller .= 'Controller';
             $this->method = empty($this->url[3]) ? 'Index' : $this->url[3];
             $this->param = empty($this->url[4]) ? $var : $this->url[4];
+            $this->param2 = empty($this->url[5]) ? $var : $this->url[5];
         }
 
 

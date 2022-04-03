@@ -117,6 +117,13 @@ public function Recover()
               }
             }
         }
+        public function Detalles($id)
+        {
+            $categoriasModel = new CategoriasModel();
+            $viewBag['categorias']=$categoriasModel->get();
+            $viewBag['productos']=$this->modelo->get($id);
+            $this->render("detalles.php",$viewBag);
+        }
 
         public function Eliminar()
         {

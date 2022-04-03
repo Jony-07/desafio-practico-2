@@ -58,7 +58,7 @@
                         <?php
                                     }
                                     ?>
-                        <a href="" class="btn btn-primary">Ver
+                        <a href="<?=PATH?>/Productos/Detalles/<?=$producto['codigo_producto']?>" class="btn btn-primary">Ver
                             más</a>
                     </div>
                 </div>

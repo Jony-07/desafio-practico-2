@@ -19,8 +19,10 @@
                         <i class="bi bi-person-fill"></i>  Mi cuenta
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item" href="<?=PATH?>">Iniciar sesión</a></li>
-                        <li><a class="dropdown-item" href="<?=PATH?>">Registrarse</a></li>
+                        <li><a class="dropdown-item" href="<?=PATH?>/Usuarios/Login">Iniciar sesión</a></li>
+                        <li><a class="dropdown-item" href="<?=PATH?>/Clientes/Signin">Registrarse</a></li>
+                        <li><a class="dropdown-item" href="<?=PATH?>/Clientes/Edit">Editar</a></li>
+                        <li><a class="dropdown-item" href="<?=PATH?>/Usuarios/Edit">Editar U</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown navbar-right">
@@ -29,11 +31,11 @@
                         <i class="bi bi-people-fill"></i> Usuarios
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item" href="<?=PATH?>">Registrar usuario</a></li>
-                        <li><a class="dropdown-item" href="<?=PATH?>">Listado de usuarios</a></li>
-                        <li><a class="dropdown-item" href="<?=PATH?>">Listado de clientes</a></li>
-                        <li><a class="dropdown-item" href="<?=PATH?>">Usuarios deshabilitados</a></li>
-                        <li><a class="dropdown-item" href="<?=PATH?>">Clientes deshabilitados</a></li>
+                        <li><a class="dropdown-item" href="<?=PATH?>/Usuarios/Signin">Registrar usuario</a></li>
+                        <li><a class="dropdown-item" href="<?=PATH?>/Usuarios/Estado/Habilitado">Listado de usuarios</a></li>
+                        <li><a class="dropdown-item" href="<?=PATH?>/Clientes/Estado/Habilitado">Listado de clientes</a></li>
+                        <li><a class="dropdown-item" href="<?=PATH?>/Usuarios/Estado/Deshabilitado">Usuarios deshabilitados</a></li>
+                        <li><a class="dropdown-item" href="<?=PATH?>/Clientes/Estado/Deshabilitado">Clientes deshabilitados</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown navbar-right">

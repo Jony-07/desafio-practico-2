@@ -21,9 +21,26 @@
     {
         return filter_var($var,FILTER_VALIDATE_EMAIL);
     }
+    
     function esProducto($var)
     {
         return preg_match('/^PROD[0-9]{5}$/',$var);
+    }
+    function esNickname($var)
+    {
+        return preg_match('/^[a-zA-Z0-9óáéúíñÁÉÓÍÚÑ\-\_]+$/',$var);
+    }
+    function esUsuario($var)
+    {
+        return preg_match('/^U[0-9]{3}$/',$var);
+    }
+    function esClave($var)
+    {
+        return preg_match('/^[a-zA-Z0-9\&\%\$\#\+\*\(\)]{8,40}$/',$var);
+    }
+    function esDUI($var)
+    {
+        return preg_match('/^0[0-9]{7}-[0-9]{1}$/',$var);
     }
     function esTelefono($var)
     {

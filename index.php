@@ -18,5 +18,6 @@ $controlador = new $router -> controller;
 $controller=$router->controller;
 $method=$router->method;
 $param=$router->param;
+$param2=$router->param2;
 $controller=new $controller;
-$controller->$method($param);
+$controller->$method($param,$param2);
