@@ -46,7 +46,7 @@
                     <div class="form-group my-3 mx-sm-4 pb-6">
                     <div class="input-group">
                         <input type="password" class="form-control" placeholder="Ingrese su Contraseña" id="clave" name="clave"
-                            id="i_pass">
+                            >
                             <div class="input-group-append">
                     <button id="show_password" class="btn btn-primary" type="button" onclick="mostrarPassword()"> <span class="bi bi-eye-slash-fill icon"></span> </button>
                     </div>
@@ -80,7 +80,7 @@
     <!-- <i class="bi bi-facebook"></i><button class="social facebook">Log in with Facebook</button> -->
     <script type="text/javascript">
     function mostrarPassword(){
-		var cambio = document.getElementById("i_pass");
+		var cambio = document.getElementById("clave");
 		if(cambio.type == "password"){
 			cambio.type = "text";
 			$('.icon').removeClass('bi bi-eye-slash-fill').addClass('bi bi-eye-fill');

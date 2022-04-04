@@ -10,12 +10,21 @@ require_once "core/validaciones.php";
         public function __construct()
         {
             $this->modelo = new ProductosModel();
+
+
         }
         public function index()
         {
-            
+           
             $categoriasModel = new CategoriasModel();
             $viewBag = array();
+            if(isset($_SESSION['login_buffer']))
+            {
+                if($_SESSION['login_buffer']['id_tipo_usuario']==3){
+            $carritosModel = new CarritosModel();
+            $viewBag['quantity'] = $carritosModel->get(sha1($_SESSION['login_buffer']['codigo_cliente']));
+                }
+            }
             $viewBag['categorias']=$categoriasModel->get();
             $viewBag['productos']=$this->modelo->get();
             $this->render("index.php",$viewBag);
@@ -32,6 +41,13 @@ require_once "core/validaciones.php";
                 if($_SESSION['login_buffer']['id_tipo_usuario']!=3){
             $categoriasModel = new CategoriasModel();
             $viewBag = array();
+            if(isset($_SESSION['login_buffer']))
+            {
+                if($_SESSION['login_buffer']['id_tipo_usuario']==3){
+            $carritosModel = new CarritosModel();
+            $viewBag['quantity'] = $carritosModel->get(sha1($_SESSION['login_buffer']['codigo_cliente']));
+                }
+            }
             $viewBag['categorias']=$categoriasModel->get();
             $viewBag['productos']=$this->modelo->get();
             $this->render("list.php",$viewBag);
@@ -86,6 +102,13 @@ require_once "core/validaciones.php";
         {
             $categoriasModel = new CategoriasModel();
             $viewBag = array();
+            if(isset($_SESSION['login_buffer']))
+            {
+                if($_SESSION['login_buffer']['id_tipo_usuario']==3){
+            $carritosModel = new CarritosModel();
+            $viewBag['quantity'] = $carritosModel->get(sha1($_SESSION['login_buffer']['codigo_cliente']));
+                }
+            }
             $viewBag['productos']=$this->modelo->getCategoria($cat);
             $viewBag['categorias']=$categoriasModel->get();
             $this->render("categoria.php",$viewBag);
@@ -140,6 +163,59 @@ require_once "core/validaciones.php";
     }    
 }
 
+public function Comprar($id)
+{
+    if(isset($_POST['Comprar']))
+    {
+        $errores=array();
+        $viewBag=array();
+        extract($_POST);
+        $carritosModel = new CarritosModel();
+        if(!isset($cantidad)||estaVacio($cantidad))
+        {
+            array_push($errores,"No haz ingresado la cantidad que deseas de este producto");
+        }elseif(!esEntero($cantidad))
+        {
+            array_push($errores,"La cantidad que escojas debe ser mayor a cero");
+        }
+        $carrito['id_session']=sha1($_SESSION['login_buffer']['codigo_cliente']);
+        $carrito['codigo_producto']=$id;
+        $carrito['cantidad']=$cantidad;
+        if(count($errores)>0)
+        {
+            $categoriasModel = new CategoriasModel();
+            $viewBag['errores']=$errores;
+            $viewBag['categorias']=$categoriasModel->get();
+            $viewBag['productos']=$this->modelo->get($id);
+            $carritosModel = new CarritosModel();
+            $viewBag['quantity'] = $carritosModel->get(sha1($_SESSION['login_buffer']['codigo_cliente']));
+            $this->render("detalles.php",$viewBag);
+        }
+        else{
+
+            if($carritosModel->create($carrito)>0){
+                header('Location: '.PATH.'/Productos');}
+                else
+                {
+                  array_push($errores,"Este producto ya está en tu carrito");
+                  $viewBag['errores']=$errores;
+                  $categoriasModel = new CategoriasModel();
+                  $viewBag['categorias']=$categoriasModel->get();
+                  $viewBag['productos']=$this->modelo->get($id);
+                  $carritosModel = new CarritosModel();
+                  $viewBag['quantity'] = $carritosModel->get(sha1($_SESSION['login_buffer']['codigo_cliente']));
+                  $this->render("detalles.php",$viewBag);
+        
+                }
+        }
+    }
+}
+
+public function Cantidad()
+{
+    
+}
+
 public function Recuperar()
 {
     $url = explode("/", $_SERVER['REQUEST_URI']);
@@ -190,6 +266,13 @@ public function Recover()
              header("Location: ".PATH."/Usuarios/login") ;   
             }
             $categoriasModel = new CategoriasModel();
+            if(isset($_SESSION['login_buffer']))
+            {
+                if($_SESSION['login_buffer']['id_tipo_usuario']==3){
+            $carritosModel = new CarritosModel();
+            $viewBag['quantity'] = $carritosModel->get(sha1($_SESSION['login_buffer']['codigo_cliente']));
+                }
+            }
             $viewBag['categorias']=$categoriasModel->get();
             $viewBag['productos']=$this->modelo->get($id);
             $this->render("detalles.php",$viewBag);

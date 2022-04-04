@@ -40,26 +40,26 @@
 
             </div>
             <div class="col-md-6">
-                <form method="POST" action="<?=PATH?>/Productos/Comprar/<?=$producto['codigo_producto']?>">
+                <form method="POST" action="<?=PATH?>/Carritos/Actualizar/<?=$producto['codigo_producto']?>">
                     <div class="form-group row">
                         <div class="col-md-12">
                             <h1 class=""><?=$producto['nombre_producto']?></h1>
 
-
+                                <input type="hidden" name="nombre_producto" id="nombre_producto"  value="<?=isset($producto)?$producto['nombre_producto']:''?>" >
 
                         </div>
                     </div>
-                    <h3 class="text-primary mx-3">$<?=$producto['precio']?></h3>
-                    <p class="card-text text-justify">CODIGO: <?=$producto['codigo_producto']?> / CATEGORI: <?=$producto['nombre_categoria']?></p>
+                    <h3 >Total: <span class="text-primary mx-3" > $<?=$producto['precio']*$producto['cantidad']?></span> </h3>
+                    <p class="card-text text-justify">CODIGO: <?=$producto['codigo_producto']?></p>
                     <?php 
                     if(isset($_SESSION['login_buffer']))
                     {
                         if($_SESSION['login_buffer']['id_tipo_usuario']==3){
                     ?>
                     <div class="form-group row my-2">
-                        <div class="col-md-2 "> <input type="number" name="cantidad"  id="cantidad" class="number">
+                        <div class="col-md-2 "> <input type="number" name="cantidad" value="<?=isset($producto)?$producto['cantidad']:''?>"  id="cantidad" class="number">
                         </div>
-                        <button name="Comprar" id="Comprar" title="Agregar" class="col-md-8 btn btn-success btn-block boton"></i>Agregar al Carrito</button>
+                        <button name="Actualizar" id="Actualizar" title="Guardar" class="col-md-8 btn btn-success btn-block boton"></i>Guardar</button>
                     </div>
                     <?php  }
                 }?>

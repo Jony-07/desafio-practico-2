@@ -12,6 +12,13 @@ class IndexController extends Controller {
     {
         $categoriasModel = new CategoriasModel();
         $viewBag = array();
+        if(isset($_SESSION['login_buffer']))
+        {
+            if($_SESSION['login_buffer']['id_tipo_usuario']==3){
+        $carritosModel = new CarritosModel();
+        $viewBag['quantity'] = $carritosModel->get(sha1($_SESSION['login_buffer']['codigo_cliente']));
+            }
+        }
         $viewBag['categorias']=$categoriasModel->get();
         $this->render("index.php",$viewBag);
     }

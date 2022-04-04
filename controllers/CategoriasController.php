@@ -159,14 +159,11 @@ require_once "./models/CategoriasModel.php";
             }
         }
 
-        public function Editar()
+        public function Editar($id)
         {
             if(isset($_POST['Actualizar']))
             {
-                $url = explode("/", $_SERVER['REQUEST_URI']);
-                $id = empty($url[4])?'':$url[4];
-                if(isset($id))
-                {
+
                     extract($_POST);
                     $errores=array();
                     $viewBag=array();
@@ -202,7 +199,7 @@ require_once "./models/CategoriasModel.php";
 
                      }
 
-                }
+                
             }
         }
 

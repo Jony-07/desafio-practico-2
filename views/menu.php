@@ -112,7 +112,21 @@
                         <?php }?>
                     </ul>
                 </li>
-                <?php }?>
+                <?php } 
+                 if(isset($_SESSION['login_buffer'])){
+                    if($_SESSION['login_buffer']['id_tipo_usuario']==3){
+                ?>
+                <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="<?=PATH?>/Carritos">
+                        <i class="bi bi-cart-fill"></i>  Carrito
+                    <?php 
+                   if(count($quantity)>0){
+                    echo "( ".count($quantity)." )";
+                   }
+                    ?>
+                    </a>
+                    </li>   
+                    <?php }} ?>
             </div>
         </div>
     </nav>
