@@ -63,7 +63,7 @@
                                     }
                                     else{
                                         ?>
-                        <p class="card-text ">Disponibilidad: <span class="text-danger"> Fuera de stock</span></p>
+                        <p class="card-text ">Disponibilidad: <span class="text-danger"> Agotado</span></p>
                         <?php
                                     }
                                     ?>

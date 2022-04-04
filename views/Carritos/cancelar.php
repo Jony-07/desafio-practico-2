@@ -40,13 +40,15 @@
 
             </div>
             <div class="col-md-6">
-                <form method="POST" action="<?=PATH?>/Carritos/Actualizar/<?=$producto['codigo_producto']?>">
+                <form method="POST" action="<?=PATH?>/Carritos/Pagar/<?=$producto['codigo_producto']?>/<?=$producto['id_carrito']?>">
                     <div class="form-group row">
                         <div class="col-md-12">
                             <h1 class=""><?=$producto['nombre_producto']?></h1>
 
-                             <input type="hidden" name="nombre_producto" id="nombre_producto" value="<?=isset($producto)?$producto['nombre_producto']:''?>">
+                            <input type="hidden" name="nombre_producto" id="nombre_producto" value="<?=isset($producto)?$producto['nombre_producto']:''?>">
                                 <input readonly type="hidden" name="id_carrito" id="id_carrito"  value="<?=isset($producto)?$producto['id_carrito']:''?>">
+                                <input type="hidden" name="existencias" id="existencias" value="<?=isset($producto)?$producto['existencias']:''?>">
+                                <input type="hidden" name="precio" id="precio" value="<?=isset($producto)?$producto['precio']:''?>">
                         </div>
                     </div>
                     <h3 >Total: <span class="text-primary mx-3" > $<?=$producto['precio']*$producto['cantidad']?></span> </h3>
@@ -57,9 +59,9 @@
                         if($_SESSION['login_buffer']['id_tipo_usuario']==3){
                     ?>
                     <div class="form-group row my-2">
-                        <div class="col-md-2 "> <input type="number" name="cantidad" value="<?=isset($producto)?$producto['cantidad']:''?>"  id="cantidad" class="number">
+                        <div class="col-md-2 "> <input readonly   name="cantidad" value="<?=isset($producto)?$producto['cantidad']:''?>"  id="cantidad" class="number">
                         </div>
-                        <button name="Actualizar" id="Actualizar" title="Guardar" class="col-md-8 btn btn-success btn-block boton"></i>Guardar</button>
+                        <button name="Cancelar" id="Cancelar" title="Cancelar" class="col-md-8 btn btn-success btn-block boton"></i>Cancelar</button>
                     </div>
                     <?php  }
                 }?>

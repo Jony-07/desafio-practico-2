@@ -126,7 +126,18 @@
                     ?>
                     </a>
                     </li>   
+                    <?php }} 
+
+                 if(isset($_SESSION['login_buffer'])){
+                    if($_SESSION['login_buffer']['id_tipo_usuario']==3){
+                ?>
+                <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="<?=PATH?>/Facturas">
+                        <i class="bi bi-bookmark-fill"></i> Comprobantes
+                    </a>
+                    </li>   
                     <?php }} ?>
+                    
             </div>
         </div>
     </nav>

@@ -46,7 +46,11 @@
                         $path="img/".$imagen;
                         if(file_exists($path))
                         {
+                            if(($producto['nombre_estado_pago'])=="Pendiente")
+                            {
                             ?>
+                            <form action="<?=PATH?>/Remover"  method="POST">
+                            <input type="hidden" name="id_carrito" id="id_carrito"  value="<?=isset($producto)?$producto['id_carrito']:''?>" >
             <div class="col" id="id_<?=$producto['codigo_producto']?>">
                 <div class="card shadow-sm prod">
                     <?php echo "<img src='".PATH."/img/$imagen' width='300px' height='250px' class='card-img-top'>"?>
@@ -68,14 +72,15 @@
                         <?php
                                     }
                                     ?>
-                        <a href="<?=PATH?>/Productos/Detalles/<?=$producto['codigo_producto']?>" class="btn btn-success">Pagar</a> &nbsp;
-                        <a href="<?=PATH?>/Carritos/Editar/<?=$producto['codigo_producto']?>" class="btn btn-primary">Editar</a> &nbsp;
-                        <a href="<?=PATH?>/Carritos/Remover/<?=$producto['codigo_producto']?>" class="btn btn-warning">Quitar</a>
+                        <a href="<?=PATH?>/Carritos/Cancelar/<?=$producto['codigo_producto']?>/<?=$producto['id_carrito']?>" class="btn btn-success">Pagar</a> &nbsp;
+                        <a href="<?=PATH?>/Carritos/Editar/<?=$producto['codigo_producto']?>/<?=$producto['id_carrito']?>" class="btn btn-primary">Editar</a> &nbsp;
+                        <a href="<?=PATH?>/Carritos/Remover/<?=$producto['codigo_producto']?>/<?=$producto['id_carrito']?>" class="btn btn-warning">Quitar</a>
                     </div>
                 </div>
             </div>
+            </form>
 
-            <?php
+            <?php }
                         }
                     
                     }

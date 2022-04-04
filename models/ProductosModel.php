@@ -33,6 +33,12 @@ class ProductosModel extends ModelPDO{
         $query = "UPDATE producto SET estado='1' WHERE codigo_producto =:codigo_producto ";
         return $this->set_query($query,[":codigo_producto"=>$id]);
     }
+
+    public function updateExistencias($existencias='',$id='')
+    {
+        $query = "UPDATE producto SET existencias=:existencias WHERE codigo_producto =:codigo_producto ";
+        return $this->set_query($query,[":existencias"=>$existencias,":codigo_producto"=>$id]);
+    }
     
     public function getCategoria($id=''){
         $query = '';

@@ -9,6 +9,7 @@ include_once "./controllers/UsuariosController.php";
 include_once "./controllers/CategoriasController.php";
 include_once "./controllers/TipoUsuarioController.php";
 include_once "./controllers/CarritosController.php";
+include_once "./controllers/FacturasController.php";
 $router = new Routing();
 /*
 echo "Controlador: $router->controller";
