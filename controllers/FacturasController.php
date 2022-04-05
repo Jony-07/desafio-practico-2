@@ -34,5 +34,65 @@ require_once "core/validaciones.php";
             $this->render("facturas.php",$viewBag);
 
         }
+        public function Resumen()
+        {
+            $categoriasModel = new CategoriasModel();
+            $productosModel = new ProductosModel();
+            $viewBag = array();
+            if(isset($_SESSION['login_buffer']))
+            {
+                if($_SESSION['login_buffer']['id_tipo_usuario']==3){
+            $carritosModel = new CarritosModel();
+            $viewBag['quantity'] = $carritosModel->CountQuantity(sha1($_SESSION['login_buffer']['codigo_cliente']));
+                }
+            }
+            $viewBag['categorias']=$categoriasModel->get();
+            $viewBag['productos']=$this->modelo->get();
+            $this->render("reports.php",$viewBag);
+        }
+
+        public function Ventas($id_producto,$id_factura,$codigo_cliente)
+        {
+
+            $productosModel = new ProductosModel();
+            $clientesModel = new ClientesModel();
+            $viewBag = array();
+            extract($_POST);
+            if(isset($_SESSION['login_buffer']))
+            {
+                if($_SESSION['login_buffer']['id_tipo_usuario']==3){
+            $carritosModel = new CarritosModel();
+            $viewBag['quantity'] = $carritosModel->CountQuantity(sha1($_SESSION['login_buffer']['codigo_cliente']));
+                }
+            }
+            $viewBag['clientes']=$clientesModel->get($codigo_cliente);
+            $viewBag['compras']=$productosModel->get($id_producto);
+            $viewBag['productos']=$this->modelo->GetSpecificSales($id_factura);
+            $this->render("reporte.php",$viewBag);
+    
+
+        }
+
+        public function Reportes($id_producto,$id_factura)
+        {
+            $productosModel = new ProductosModel();
+            $clientesModel = new ClientesModel();
+            $viewBag = array();
+            if(isset($_SESSION['login_buffer']))
+            {
+                if($_SESSION['login_buffer']['id_tipo_usuario']==3){
+            $carritosModel = new CarritosModel();
+            $viewBag['quantity'] = $carritosModel->CountQuantity(sha1($_SESSION['login_buffer']['codigo_cliente']));
+                }
+            }
+            $codigo=$_SESSION['login_buffer']['codigo_cliente'];
+            $viewBag['clientes']=$clientesModel->get($codigo);
+            $reporte['id_session']=sha1($_SESSION['login_buffer']['codigo_cliente']);
+            $reporte['id_factura']=$id_factura;
+            $viewBag['compras']=$productosModel->get($id_producto);
+            $viewBag['productos']=$this->modelo->GetMySpecificSales($reporte);
+            $this->render("reporte.php",$viewBag);
+
+        }
     }
 ?>

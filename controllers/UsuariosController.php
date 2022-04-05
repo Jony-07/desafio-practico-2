@@ -263,6 +263,13 @@ require_once "./models/ClientesModel.php";
             $categoriasModel = new CategoriasModel();
             $viewBag['categorias']=$categoriasModel->get();
             $this->render("login.php",$viewBag);
+            if(isset($_SESSION['login_buffer']))
+            {
+                if($_SESSION['login_buffer']['id_tipo_usuario']==3){
+            $carritosModel = new CarritosModel();
+            $viewBag['quantity'] = $carritosModel->CountQuantity(sha1($_SESSION['login_buffer']['codigo_cliente']));
+                }
+            }
         }
         public function Validate()
         {

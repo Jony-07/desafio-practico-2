@@ -6,7 +6,8 @@ class FacturasModel extends ModelPDO{
         $query = '';
         if($id==''){
             // retornar todos
-            $query="SELECT * FROM ventas";
+            $query="SELECT * FROM ventas V INNER JOIN cliente C ON V.codigo_cliente=C.codigo_cliente
+            INNER JOIN carrito A ON V.id_carrito=A.id_carrito;";
         }
         else{
             //Retorno por llave primaria
@@ -20,6 +21,13 @@ class FacturasModel extends ModelPDO{
         $query= "SELECT * FROM ventas V INNER JOIN cliente C ON V.codigo_cliente=C.codigo_cliente
         INNER JOIN carrito A ON V.id_carrito=A.id_carrito WHERE id_session=:id_session ";
   return $this->get_query($query,[":id_session"=>$id]);
+    }
+
+    public function GetSpecificSales($idfact)
+    {
+        $query= "SELECT * FROM ventas V INNER JOIN cliente C ON V.codigo_cliente=C.codigo_cliente
+        INNER JOIN carrito A ON V.id_carrito=A.id_carrito WHERE id_factura=:id_factura";
+  return $this->get_query($query,[":id_factura"=>$idfact]);
     }
 
     public function GetMySpecificSales($arreglo=array())

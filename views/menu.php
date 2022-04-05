@@ -136,7 +136,16 @@
                         <i class="bi bi-bookmark-fill"></i> Comprobantes
                     </a>
                     </li>   
-                    <?php }} ?>
+                    <?php }} 
+                if(isset($_SESSION['login_buffer'])){
+                if($_SESSION['login_buffer']['id_tipo_usuario']==1){
+                ?>
+                <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="<?=PATH?>/Facturas/Resumen">
+                 <i class="bi bi-bookmark-fill"></i> Ventas
+                </a>
+                </li>   
+                <?php }} ?>
                     
             </div>
         </div>
