@@ -17,7 +17,7 @@
     ?>
     <div class="container">
     <h1 class="my-5" ><center>Acceso denegado</center> </h1>
-   <center><img src="<?=PATH?>/views/Index/master.jpg" alt="" width="300px" height="300" class="rounded "></center>
+  <a href="https://youtu.be/Udt-9J8nzGE" target="_blank" rel="noopener noreferrer"><center><img src="<?=PATH?>/views/Index/master.jpg" alt="" width="300px" height="300" class="rounded "></center></a>
     </div> 
 </body>
 </html>

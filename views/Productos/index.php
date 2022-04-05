@@ -31,10 +31,26 @@
              else{
                  if($_SESSION['login_buffer']['id_tipo_usuario']!=3){
             ?>
+                       <div class="row my-2">
+                <div class="col-md-4">
             <a type="button" class="btn btn-md" style="background-color: #343a40; color:white" href="<?=PATH?>/Productos/create"><i class="bi bi-plus-square"></i>&nbsp; Agregar</a>
-           <?php   } }?>
-           
-            <input type="search" name="buscador" id="buscador" placeholder="Buscar...">
+                </div>
+                       </div>
+            <?php   } }?>
+           <div class="row my-2">
+                <div class="col-md-4">
+                <div class="input-group">
+           <input type="search" class="form-control" name="buscador" id="buscador" placeholder="Buscar...">
+           <div class="input-group-append">
+               <span class="input-group-text">
+               <i class="bi bi-search"></i>
+               </span>
+           </div>
+        </div>
+                </div>
+           </div>
+
+
             </div>
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3 my-3">
             <?php
@@ -49,7 +65,7 @@
                         {
                             ?>
             <div class="col" id="id_<?=$producto['codigo_producto']?>">
-                <div class="card shadow-sm prod">
+                <div class="card carta shadow-sm prod">
                     <?php echo "<img src='".PATH."/img/$imagen' width='300px' height='250px' class='card-img-top'>"?>
                     <div class="card-body">
                         <h5 class="card-title">

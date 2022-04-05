@@ -10,16 +10,56 @@ ob_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de productos</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
-    <link href="https://cdn.jsdelivr.et/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <style>
         .padd{
-            padding-top: 40px;
-            margin-top: 40px;
+            margin-top: 50px;
+            padding-top: 20px;
+        }
+        .title{
+            padding: 30px;
+            border-radius: 25px;
+            border-color: #343a40;
+            background-color:#0ce7a1;
+           
+        }
+        .thend{
+            padding: 20px;
+            border-radius: 25px;
+            border: 2px solid #0ce7a1;
+            margin-top: 15px;
+        }
+        .medium{
+            padding: 20px;
+            border-radius: 25px;
+            border: 2px solid #0ce7a1;
+        }
+        .footer{
+            font-size: 20px;
+            padding: 20px;
+            border-radius: 25px;
+            border-color: #343a40;
+            background-color:#0ce7a1;
+        }
+        a{
+            text-decoration: none;
+            color: black;
+        }
+
+        table{
+            padding: 15px;
+            margin: auto;
+            border-collapse: collapse;
+        }
+        td,th{
+            border-top: 0.5px solid black;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            text-align: center;
         }
     </style>
-    <?php
-        include 'views/header.php';
-    ?>
+
 </head>
 <body>
 
@@ -37,14 +77,15 @@ ob_start();
                       
                    ?>
                         <div class="row">
+                            <div class="title">
                      <center> <p style="font-size: 60px;">Textil Export</p>  
-                    <small style="color: blue;font-size:15 px;font-style: italic;">Más que un servicio, una solución</small>
-                    </center> 
+                    <small style="color: black;font-size:15 px;font-style: italic;">Más que un servicio, una solución</small>
+                    </center> </div>
                      <br>
+                     <div class="medium">
                <center><p>FACTURA: <?=$producto['id_factura']?> / ID:<?=$producto['codigo_producto']?></p>
             <p style="font-size: 16px;font-style: italic;">Información</p>
 
-            <br>
                     <?php  foreach ($clientes as $cliente)
                    {
                        ?>
@@ -59,8 +100,10 @@ ob_start();
             
             </center>
             </div>
+            </div>
+            <div class="thend">
                 <table class="table table-striped table-bordered table-hover table-responsive table-condensed">
-                    <thead class="Te" style="background-color:white; color:#343a40">
+                   <thead class="Te" style="background-color:white; color:#343a40">
                         <tr>
                             <th>Fecha de compra</th>
                             <th>Producto</th>
@@ -85,12 +128,19 @@ ob_start();
                         </tr>
                        
                     </tbody>
+                   
                 </table>
+                </div>
                 <br>
                 <br>
+                <div class="footer">
+
+               
                     <center>
-                        <p style="font-style: italic;">Gracias por confiar en nosotros..!</p>
+                       <a href="<?=PATH?>"> <p style="font-style: italic;">Gracias por confiar en nosotros..!</p></a>
                     </center>
+
+                    </div>
 
                 <?php
                         

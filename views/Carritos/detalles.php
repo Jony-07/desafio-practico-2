@@ -33,7 +33,7 @@
                 <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <?php echo "<img src='".PATH."/img/".$producto['imagen']."'  class='rounded float-start col-md-10'>"?>
+                            <?php echo "<img src='".PATH."/img/".$producto['imagen']."'  class='rounded float-start col-md-10 img-datails'>"?>
                         </div>
                     </div>
                 </div>

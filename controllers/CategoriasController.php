@@ -26,12 +26,9 @@ require_once "./models/CategoriasModel.php";
     }
         }
 
-        public function Recuperar()
+        public function Recuperar($id)
         {
-        $url = explode("/", $_SERVER['REQUEST_URI']);
-        $id = empty($url[4])?'':$url[4];
-        if(isset($id))
-        {
+
             if(!isset($_SESSION['login_buffer']))
             {
              header("Location: ".PATH."/Usuarios/login") ;   
@@ -45,7 +42,7 @@ require_once "./models/CategoriasModel.php";
         header("Location: ".PATH."/Index/Default") ;
     }
 }
-        }
+        
         }
         public function Recover()
         {

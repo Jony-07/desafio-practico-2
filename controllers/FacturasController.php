@@ -19,6 +19,14 @@ require_once "core/validaciones.php";
 
         public function Index()
         {
+            if(!isset($_SESSION['login_buffer']))
+            {
+             header("Location: ".PATH."/Usuarios/login") ;   
+            }
+            else{
+                if($_SESSION['login_buffer']['id_tipo_usuario']==3){
+        
+   
             $categoriasModel = new CategoriasModel();
             $productosModel = new ProductosModel();
             $viewBag = array();
@@ -32,10 +40,20 @@ require_once "core/validaciones.php";
             $viewBag['categorias']=$categoriasModel->get();
             $viewBag['productos']=$this->modelo->GetMySales(sha1($_SESSION['login_buffer']['codigo_cliente']));
             $this->render("facturas.php",$viewBag);
+        }   else{
+            header("Location: ".PATH."/Index/Default") ;
+        }
+    }
 
         }
         public function Resumen()
         {
+            if(!isset($_SESSION['login_buffer']))
+            {
+             header("Location: ".PATH."/Usuarios/login") ;   
+            }
+            else{
+                if($_SESSION['login_buffer']['id_tipo_usuario']==1){
             $categoriasModel = new CategoriasModel();
             $productosModel = new ProductosModel();
             $viewBag = array();
@@ -49,11 +67,20 @@ require_once "core/validaciones.php";
             $viewBag['categorias']=$categoriasModel->get();
             $viewBag['productos']=$this->modelo->get();
             $this->render("reports.php",$viewBag);
+        }   else{
+            header("Location: ".PATH."/Index/Default") ;
+        }
+    }
         }
 
         public function Ventas($id_producto,$id_factura,$codigo_cliente)
         {
-
+            if(!isset($_SESSION['login_buffer']))
+            {
+             header("Location: ".PATH."/Usuarios/login") ;   
+            }
+            else{
+                if($_SESSION['login_buffer']['id_tipo_usuario']==1){
             $productosModel = new ProductosModel();
             $clientesModel = new ClientesModel();
             $viewBag = array();
@@ -70,11 +97,20 @@ require_once "core/validaciones.php";
             $viewBag['productos']=$this->modelo->GetSpecificSales($id_factura);
             $this->render("reporte.php",$viewBag);
     
-
+        }   else{
+            header("Location: ".PATH."/Index/Default") ;
+        }
+    }
         }
 
         public function Reportes($id_producto,$id_factura)
         {
+            if(!isset($_SESSION['login_buffer']))
+            {
+             header("Location: ".PATH."/Usuarios/login") ;   
+            }
+            else{
+                if($_SESSION['login_buffer']['id_tipo_usuario']==3){
             $productosModel = new ProductosModel();
             $clientesModel = new ClientesModel();
             $viewBag = array();
@@ -92,6 +128,10 @@ require_once "core/validaciones.php";
             $viewBag['compras']=$productosModel->get($id_producto);
             $viewBag['productos']=$this->modelo->GetMySpecificSales($reporte);
             $this->render("reporte.php",$viewBag);
+        }   else{
+            header("Location: ".PATH."/Index/Default") ;
+        }
+    }
 
         }
     }

@@ -52,7 +52,7 @@
                             <form action="<?=PATH?>/Remover"  method="POST">
                             <input type="hidden" name="id_carrito" id="id_carrito"  value="<?=isset($producto)?$producto['id_carrito']:''?>" >
             <div class="col" id="id_<?=$producto['codigo_producto']?>">
-                <div class="card shadow-sm prod">
+                <div class="card shadow-sm prod carta">
                     <?php echo "<img src='".PATH."/img/$imagen' width='300px' height='250px' class='card-img-top'>"?>
                     <div class="card-body">
                         <h5 class="card-title">

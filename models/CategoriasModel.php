@@ -16,7 +16,12 @@ class CategoriasModel extends ModelPDO{
     }
     public function getDescontinuados($id=''){
         $query = '';     // retornar todos
+        if($id==''){
             $query="SELECT * FROM categoria WHERE estado_categoria='0'";
+        }
+        else{
+            $query="SELECT * FROM categoria WHERE id_categoria=:id_categoria AND estado_categoria='0'";
+        }
         return $this->get_query($query,[":id_categoria"=>$id]);
     }
     public function create($arreglo=array()){

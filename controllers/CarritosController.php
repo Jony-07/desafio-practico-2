@@ -16,6 +16,12 @@ class CarritosController extends Controller {
 
     public function Index()
     {
+        if(!isset($_SESSION['login_buffer']))
+        {
+         header("Location: ".PATH."/Usuarios/login") ;   
+        }
+        else{
+            if($_SESSION['login_buffer']['id_tipo_usuario']==3){
         $categoriasModel = new CategoriasModel();
         $viewBag = array();
         if(isset($_SESSION['login_buffer']))
@@ -28,6 +34,10 @@ class CarritosController extends Controller {
         $viewBag['categorias']=$categoriasModel->get();
         $viewBag['productos']=$this->modelo->get(sha1($_SESSION['login_buffer']['codigo_cliente']));
         $this->render("index.php",$viewBag);
+    }   else{
+        header("Location: ".PATH."/Index/Default") ;
+    }
+}
     }
 
     public function Comprobantes()
@@ -49,6 +59,12 @@ class CarritosController extends Controller {
 
     public function Remover($cod,$id_carrito)
     {
+        if(!isset($_SESSION['login_buffer']))
+        {
+         header("Location: ".PATH."/Usuarios/login") ;   
+        }
+        else{
+            if($_SESSION['login_buffer']['id_tipo_usuario']==3){
         $categoriasModel = new CategoriasModel();
         $viewBag = array();
         if(isset($_SESSION['login_buffer']))
@@ -66,12 +82,22 @@ class CarritosController extends Controller {
         {
             header("Location: ".PATH."/Carritos");
         }
+    }   else{
+        header("Location: ".PATH."/Index/Default") ;
+    }
+}
 
 
     }
 
     public function Editar($cod,$id)
     {
+        if(!isset($_SESSION['login_buffer']))
+        {
+         header("Location: ".PATH."/Usuarios/login") ;   
+        }
+        else{
+            if($_SESSION['login_buffer']['id_tipo_usuario']==3){
         $categoriasModel = new CategoriasModel();
         $viewBag = array();
         if(isset($_SESSION['login_buffer']))
@@ -84,10 +110,15 @@ class CarritosController extends Controller {
         $viewBag['categorias']=$categoriasModel->get();
         $viewBag['productos']=$this->modelo->getEle($id);
         $this->render("detalles.php",$viewBag);
+    }   else{
+        header("Location: ".PATH."/Index/Default") ;
+    }
+}
     }
 
     public function Cancelar($cod,$id)
     {
+        
         $categoriasModel = new CategoriasModel();
         $viewBag = array();
         if(isset($_SESSION['login_buffer']))
@@ -119,6 +150,12 @@ class CarritosController extends Controller {
 
     public function Pagar($id,$carrito)
     {
+        if(!isset($_SESSION['login_buffer']))
+        {
+         header("Location: ".PATH."/Usuarios/login") ;   
+        }
+        else{
+            if($_SESSION['login_buffer']['id_tipo_usuario']==3){
         date_default_timezone_set("America/El_Salvador");
         $categoriasModel = new CategoriasModel();
         $facturasModel = new FacturasModel();
@@ -159,10 +196,20 @@ class CarritosController extends Controller {
                 var_dump($factura);
             }
         } 
+    }   else{
+        header("Location: ".PATH."/Index/Default") ;
+    }
+}
     }
 
     public function Actualizar($id,$cod)
     {
+        if(!isset($_SESSION['login_buffer']))
+        {
+         header("Location: ".PATH."/Usuarios/login") ;   
+        }
+        else{
+            if($_SESSION['login_buffer']['id_tipo_usuario']==3){
         $categoriasModel = new CategoriasModel();
         $viewBag = array(); 
         $errores = array();
@@ -210,6 +257,10 @@ class CarritosController extends Controller {
                 }
             }
         }
+    }   else{
+        header("Location: ".PATH."/Index/Default") ;
+    }
+}
     }
 }
 

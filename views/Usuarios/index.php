@@ -24,7 +24,7 @@
         <div class="col ml-5">
             <!-- <a class="edit" href="?c=products&a=Insert"><i class="bi bi-plus-square-fill"></i> Insertar</a> -->
             <div class="row mt-3">
-                <table class="table table-striped table-bordered table-hover table-responsive table-condensed">
+                <table id="listado" class="table table-striped table-bordered table-hover table-responsive table-condensed">
                     <thead class="Te" style="background-color: #343a40; color:white">
                         <tr>
                             <th>Codigo</th>
@@ -67,5 +67,10 @@
         </div> 
             </div>
 </div>
+<script>
+    $(document).ready(function () {
+        $('#listado').DataTable();
+    });
+</script>
     </body>
 </html>

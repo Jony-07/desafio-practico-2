@@ -33,7 +33,7 @@
                 <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <?php echo "<img src='".PATH."/img/".$producto['imagen']."'  class='rounded float-start col-md-10'>"?>
+                            <?php echo "<img src='".PATH."/img/".$producto['imagen']."'  class='rounded float-start col-md-10 img-datails'>"?>
                         </div>
                     </div>
                 </div>
@@ -55,13 +55,15 @@
                     if(isset($_SESSION['login_buffer']))
                     {
                         if($_SESSION['login_buffer']['id_tipo_usuario']==3){
+                            if(($producto['existencias'])>0)
+                            {
                     ?>
                     <div class="form-group row my-2">
                         <div class="col-md-2 "> <input type="number" name="cantidad"  id="cantidad" class="number">
                         </div>
                         <button name="Comprar" id="Comprar" title="Agregar" class="col-md-8 btn btn-success btn-block boton"></i>Agregar al Carrito</button>
                     </div>
-                    <?php  }
+                    <?php } }
                 }?>
 
                 </form>
@@ -79,7 +81,7 @@
                                     }
                                     else{
                                         ?>
-                            <p class="card-text ">Disponibilidad: <span class="text-danger"> Fuera de stock</span></p>
+                            <p class="card-text ">Disponibilidad: <span class="text-danger"> Agotado</span></p>
                             <?php
                                     }
                                     ?>
