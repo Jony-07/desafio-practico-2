@@ -8,7 +8,7 @@
     <?php
         include 'views/header.php';
     ?>
-    <title>Cliente</title>
+    <title>Registrar Usuario</title>
 </head>
 
 <body>
@@ -55,15 +55,21 @@
                                 </td>
                                 <td></td>
                                 <td>
-                                    <div class="form-group mx-sm-4 pt-3">
+                                <div class="form-group mx-sm-4 pt-3">
                                         <label for="id_tipo_usuario" class="form-label">Tipo usuario</label>
                                         <select class="form-select" name="id_tipo_usuario" id="id_tipo_usuario" aria-label="Floating label select example">
                                         <?php
                                     foreach($tipo_usuarios as $tipo_usuario){
+                                        if($tipo_usuario['nombre_tipo_usuario']!='Cliente'){
+                                        if($tipo_usuario['nombre_tipo_usuario']==$usuario['nombre_tipo_usuario'])
+                                        {
                                 ?>
-                                    <option value="<?=$tipo_usuario['id_tipo_usuario']?>"><?=$tipo_usuario['nombre_tipo_usuario']?></option>
-                                    <?php } ?>  
+                                    <option selected value="<?=$tipo_usuario['id_tipo_usuario']?>"><?=$tipo_usuario['nombre_tipo_usuario']?></option>
+                                    <?php } else{ ?>
+                                        <option value="<?=$tipo_usuario['id_tipo_usuario']?>"><?=$tipo_usuario['nombre_tipo_usuario']?></option>
+                                    <?php } }} ?>  
                                         </select>
+                                      
                                     </div>
                                 </td>
                             </tr>
@@ -71,7 +77,7 @@
                                 <th scope="row"></th>
                                 <td>
                                     <div class="form-group mx-sm-4 pt-3">
-                                        <label for="nickname" class="form-label">Nombre</label>
+                                        <label for="nickname" class="form-label">Nickname</label>
                                         <input type="text" class="form-control" placeholder="Ingrese su nombre"
                                             name="nickname" id="nickname" value="<?=isset($usuario)?$usuario['nombre']:''?>"">
                                     </div>

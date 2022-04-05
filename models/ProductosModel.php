@@ -14,6 +14,36 @@ class ProductosModel extends ModelPDO{
         }
         return $this->get_query($query,[":codigo_producto"=>$id]);
     }
+
+    public function OrderByAsc($id=''){
+        $query = '';
+        if($id==''){
+            // retornar todos
+            $query="SELECT * FROM producto P INNER JOIN categoria C ON P.id_categoria=C.id_categoria WHERE estado='1'
+            GROUP BY precio ASC;";
+        }
+        else{
+            //Retorno por llave primaria
+            $query= "SELECT * FROM producto P INNER JOIN categoria C ON P.id_categoria=C.id_categoria WHERE codigo_producto =:codigo_producto AND estado='1'";
+        }
+        return $this->get_query($query,[":codigo_producto"=>$id]);
+    }
+    public function OrderByDesc($id=''){
+        $query = '';
+        if($id==''){
+            // retornar todos
+            $query="SELECT * FROM producto P INNER JOIN categoria C ON P.id_categoria=C.id_categoria WHERE estado='1'
+            GROUP BY precio DESC;";
+        }
+        else{
+            //Retorno por llave primaria
+            $query= "SELECT * FROM producto P INNER JOIN categoria C ON P.id_categoria=C.id_categoria WHERE codigo_producto =:codigo_producto AND estado='1'";
+        }
+        return $this->get_query($query,[":codigo_producto"=>$id]);
+    }
+
+
+
     public function getDescontinuados($id='')
     {
         $query = '';

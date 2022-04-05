@@ -30,6 +30,29 @@ require_once "core/validaciones.php";
             $this->render("index.php",$viewBag);
         }
 
+        public function Order($by)
+        {
+           
+            $categoriasModel = new CategoriasModel();
+            $viewBag = array();
+            if(isset($_SESSION['login_buffer']))
+            {
+                if($_SESSION['login_buffer']['id_tipo_usuario']==3){
+            $carritosModel = new CarritosModel();
+            $viewBag['quantity'] = $carritosModel->CountQuantity(sha1($_SESSION['login_buffer']['codigo_cliente']));
+                }
+            }
+            $viewBag['categorias']=$categoriasModel->get();
+            if($by=="Asc")
+            {
+                $viewBag['productos']=$this->modelo->OrderByAsc();
+            }
+            elseif($by="Desc"){
+                $viewBag['productos']=$this->modelo->OrderByDesc();
+            }
+            
+            $this->render("index.php",$viewBag);
+        }
 
         public function listado()
         {

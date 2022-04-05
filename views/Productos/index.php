@@ -48,6 +48,10 @@
            </div>
         </div>
                 </div>
+                <div class="col-md-4">
+                <a type="button" class="btn btn-md" style="background-color: #343a40; color:white" href="<?=PATH?>/Productos/Order/Desc"><i class="bi bi-arrow-down-square-fill"></i></i>&nbsp; Mayor precio</a>
+                <a type="button" class="btn btn-md" style="background-color: #343a40; color:white" href="<?=PATH?>/Productos/Order/Asc"><i class="bi bi-arrow-up-square-fill"></i></i>&nbsp; Menor precio</a>
+                </div>
            </div>
 
 

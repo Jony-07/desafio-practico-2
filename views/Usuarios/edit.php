@@ -8,7 +8,7 @@
     <?php
         include 'views/header.php';
     ?>
-    <title>Usuario</title>
+    <title>Editar Usuario</title>
 </head>
 
 <body>
@@ -56,7 +56,7 @@
                                         <select class="form-select" name="id_tipo_usuario" id="id_tipo_usuario" aria-label="Floating label select example">
                                         <?php
                                     foreach($tipo_usuarios as $tipo_usuario){
-                                        if($tipo_usuario['id_tipo_usuario']!='Cliente'){
+                                        if($tipo_usuario['nombre_tipo_usuario']!='Cliente'){
                                         if($tipo_usuario['nombre_tipo_usuario']==$usuario['nombre_tipo_usuario'])
                                         {
                                 ?>
