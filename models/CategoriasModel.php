@@ -7,12 +7,14 @@ class CategoriasModel extends ModelPDO{
         if($id==''){
             // retornar todos
             $query="SELECT * FROM categoria WHERE estado_categoria='1'";
+            return $this->get_query($query);
         }
         else{
             //Retorno por llave primaria
             $query= "SELECT * FROM categoria WHERE id_categoria=:id_categoria AND estado_categoria='1'";
+            return $this->get_query($query,[":id_categoria"=>$id]);
         }
-        return $this->get_query($query,[":id_categoria"=>$id]);
+       
     }
     public function getDescontinuados($id=''){
         $query = '';     // retornar todos

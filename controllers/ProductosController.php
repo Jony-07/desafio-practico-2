@@ -396,44 +396,44 @@ $producto['precio']=$precio;
 $producto['existencias']=$existencias;
 $producto['precio']=$precio;
 
-if(count($errores)>0)
-{
-  $categoriasModel = new CategoriasModel();
-  $viewBag['errores']=$errores;
-  $viewBag['productos']=$this->modelo->get($codigo_producto);
-  $viewBag['categorias']=$categoriasModel->get();
-  $this->render("edit.php",$viewBag);    
-}
-else{
-    if (empty($filename))
-{
-
-    if($this->modelo->updateImgNone($producto)>0){
-        header('Location: '.PATH.'/Productos/Listado');}
-}
-elseif(!empty($filename)){
-    if (!( ($extension == "png" || $extension == "jpg" || $extension == "jpeg") && ($size < 2000000))) {
-        array_push($errores,"Debes ingresar una imagen válida (png/jpg)");
-       }
-       else{
-        $producto['imagen']=$codigo_producto.'.'.$extension;
-        $path="img";
-        if(file_exists($path))
-        {
-            $dir=$path.'/'.$producto['imagen'];
-            if(move_uploaded_file($temp,$dir))
+            if(count($errores)>0)
             {
-        if($this->modelo->update($producto)>0){
-          header('Location: '.PATH.'/Productos/Listado');}
-          $viewBag['productos']=$this->modelo->get();
-          $this->render("list.php",$viewBag);
-        }
-    }
-       }
-     
-}
-  }
-}
+            $categoriasModel = new CategoriasModel();
+            $viewBag['errores']=$errores;
+            $viewBag['productos']=$this->modelo->get($codigo_producto);
+            $viewBag['categorias']=$categoriasModel->get();
+            $this->render("edit.php",$viewBag);    
+            }
+            else{
+                if (empty($filename))
+            {
+
+                if($this->modelo->updateImgNone($producto)>0){
+                    header('Location: '.PATH.'/Productos/Listado');}
+            }
+            elseif(!empty($filename)){
+                if (!( ($extension == "png" || $extension == "jpg" || $extension == "jpeg") && ($size < 2000000))) {
+                    array_push($errores,"Debes ingresar una imagen válida (png/jpg)");
+                }
+                else{
+                    $producto['imagen']=$codigo_producto.'.'.$extension;
+                    $path="img";
+                    if(file_exists($path))
+                    {
+                        $dir=$path.'/'.$producto['imagen'];
+                        if(move_uploaded_file($temp,$dir))
+                        {
+                    if($this->modelo->update($producto)>0){
+                    header('Location: '.PATH.'/Productos/Listado');}
+                    $viewBag['productos']=$this->modelo->get();
+                    $this->render("list.php",$viewBag);
+                    }
+                }
+                }
+                
+            }
+            }
+            }
         }
     }
 

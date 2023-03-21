@@ -20,11 +20,7 @@ $controlador = new $router -> controller;
 $controller=$router->controller;
 $method=$router->method;
 $param=$router->param;
-$param2=$router->param2;
-$param3=$router->param3;
 session_start();
-error_reporting(0);
+
 $controller=new $controller;
-$controller->$method($param,$param2,$param3);
-
-
+$controller->$method($param);

@@ -4,7 +4,7 @@ abstract class ModelPDO{
         private $db_host="localhost";
         private $db_user="root";
         private $db_pass="";
-        private $db_name="textil_export";
+        private $db_name="textil-export";
         protected $conn;
 
         function __construct()
