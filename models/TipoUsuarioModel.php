@@ -7,12 +7,14 @@ class TipoUsuarioModel extends ModelPDO{
         if($id==''){
             // retornar todos
             $query="SELECT * FROM tipo_usuario";
+            return $this->get_query($query);
         }
         else{
             //Retorno por llave primaria
             $query= "SELECT * FROM tipo_usuario WHERE id_tipo_usuario=:id_tipo_usuario";
+            return $this->get_query($query,[":id_tipo_usuario"=>$id]);
         }
-        return $this->get_query($query,[":id_tipo_usuario"=>$id]);
+       
     }
     public function create($arreglo=array()){
         $query="INSERT INTO tipo_usuario(id_tipo_usuario, nombre_tipo_usuario) VALUES (:id_tipo_usuario, :nombre_tipo_usuario)";

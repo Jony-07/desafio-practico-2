@@ -12,14 +12,14 @@
 </head>
 
 <body>
-<?php
+    <?php
         include 'views/menu.php';
     ?>
     <div class="row mx-5 mt-5 my-4">
         <div class="col ml-5">
             <div class="row mt-3">
                 <form method="POST" action="<?=PATH?>/Usuarios/Registrar" enctype="multipart/form-data" class="">
-                <?php
+                    <?php
                    if(isset($errores))
                    {
                        if(count($errores)>0)
@@ -50,26 +50,31 @@
                                 <td>
                                     <div class="form-group mx-sm-4 pt-3">
                                         <label for="codigo_usuario" class="form-label">Codigo usuario</label>
-                                        <input type="text" class="form-control" id="codigo_usuario" placeholder="U123" value="<?=isset($usuario)?$usuario['codigo_usuario']:''?>" name="codigo_usuario">
+                                        <input type="text" class="form-control" id="codigo_usuario" placeholder="U123"
+                                            value="<?=isset($usuario)?$usuario['codigo_usuario']:''?>"
+                                            name="codigo_usuario">
                                     </div>
                                 </td>
                                 <td></td>
                                 <td>
-                                <div class="form-group mx-sm-4 pt-3">
+                                    <div class="form-group mx-sm-4 pt-3">
                                         <label for="id_tipo_usuario" class="form-label">Tipo usuario</label>
-                                        <select class="form-select" name="id_tipo_usuario" id="id_tipo_usuario" aria-label="Floating label select example">
-                                        <?php
+                                        <select class="form-select" name="id_tipo_usuario" id="id_tipo_usuario"
+                                            aria-label="Floating label select example">
+                                            <?php
                                     foreach($tipo_usuarios as $tipo_usuario){
                                         if($tipo_usuario['nombre_tipo_usuario']!='Cliente'){
-                                        if($tipo_usuario['nombre_tipo_usuario']==$usuario['nombre_tipo_usuario'])
+                                        if($tipo_usuario['nombre_tipo_usuario']==isset($usuario)?$usuario['nombre_tipo_usuario']:'')
                                         {
                                 ?>
-                                    <option selected value="<?=$tipo_usuario['id_tipo_usuario']?>"><?=$tipo_usuario['nombre_tipo_usuario']?></option>
-                                    <?php } else{ ?>
-                                        <option value="<?=$tipo_usuario['id_tipo_usuario']?>"><?=$tipo_usuario['nombre_tipo_usuario']?></option>
-                                    <?php } }} ?>  
+                                            <option selected value="<?=$tipo_usuario['id_tipo_usuario']?>">
+                                                <?=$tipo_usuario['nombre_tipo_usuario']?></option>
+                                            <?php } else{ ?>
+                                            <option value="<?=$tipo_usuario['id_tipo_usuario']?>">
+                                                <?=$tipo_usuario['nombre_tipo_usuario']?></option>
+                                            <?php } }} ?>
                                         </select>
-                                      
+
                                     </div>
                                 </td>
                             </tr>
@@ -79,19 +84,22 @@
                                     <div class="form-group mx-sm-4 pt-3">
                                         <label for="nickname" class="form-label">Nickname</label>
                                         <input type="text" class="form-control" placeholder="Ingrese su nombre"
-                                            name="nickname" id="nickname" value="<?=isset($usuario)?$usuario['nombre']:''?>"">
+                                            name="nickname" id="nickname"
+                                            value="<?=isset($usuario)?$usuario['nombre']:''?>"">
                                     </div>
                                 </td>
                                 <td></td>
                                 <td>
-                                    <div class="form-group mx-sm-4 pt-3">                            
+                                    <div class=" form-group mx-sm-4 pt-3">
                                         <label for="clave" class="form-label">Clave</label>
                                         <div class="input-group">
-                                            <input type="password" class="form-control" placeholder="Ingrese su Clave" name="clave" id="clave">
-                                        <div class="input-group-append">
-                                        <button id="show_password" class="btn btn-primary" type="button" onclick="mostrarPassword()">
-                                        <i class="bi bi-eye-slash-fill icon"></i></button>
-                                        </div>
+                                            <input type="password" class="form-control" placeholder="Ingrese su Clave"
+                                                name="clave" id="clave">
+                                            <div class="input-group-append">
+                                                <button id="show_password" class="btn btn-primary" type="button"
+                                                    onclick="mostrarPassword()">
+                                                    <i class="bi bi-eye-slash-fill icon"></i></button>
+                                            </div>
                                         </div>
                                     </div>
                                 </td>
@@ -102,7 +110,8 @@
                                     <div class="form-group mx-sm-4 pt-3">
                                         <label for="correo" class="form-label">Correo</label>
                                         <input type="text" class="form-control"
-                                            placeholder="Ingrese su Correo Electronico" name="correo" value="<?=isset($usuario)?$usuario['correo']:''?>" id="correo">
+                                            placeholder="Ingrese su Correo Electronico" name="correo"
+                                            value="<?=isset($usuario)?$usuario['correo']:''?>" id="correo">
                                     </div>
                                 </td>
                                 <td></td>
@@ -119,26 +128,29 @@
                                 <td>
                                     <div class="form-group mx-sm-4 pt-3">
                                         <label for="telefono" class="form-label">Numero De Telefono</label>
-                                        <input type="text" class="form-control"
-                                            placeholder="7083-6536" name="telefono" value="<?=isset($usuario)?$usuario['telefono']:''?>" id="telefono">
+                                        <input type="text" class="form-control" placeholder="7083-6536" name="telefono"
+                                            value="<?=isset($usuario)?$usuario['telefono']:''?>" id="telefono">
                                     </div>
                                 </td>
                                 <td></td>
                                 <td>
                                     <div class="d-flex justify-content-center">
                                         <div class="my-2">
-                                        <input type="submit" class="btn btn-dark" value="Guardar" name="Guardar"> &nbsp;
-                        <a class="btn btn-danger" href="<?= PATH ?>">Cancelar</a>
+                                            <input type="submit" class="btn btn-dark" value="Guardar" name="Guardar">
+                                            &nbsp;
+                                            <a class="btn btn-danger" href="<?= PATH ?>">Cancelar</a>
                                         </div>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row"></th>
-                                <td><div class="form-group mx-sm-4 pt-3">
+                                <td>
+                                    <div class="form-group mx-sm-4 pt-3">
                                         <input type="hidden" class="form-control" placeholder="Ingrese su direccion"
                                             name="Verificar" id="Verificar" value="0">
-                                    </div></td>
+                                    </div>
+                                </td>
                                 <td>
                                 </td>
                             </tr>
@@ -147,15 +159,16 @@
             </div>
             </form>
             <script type="text/javascript">
-            function mostrarPassword(){
-		    var cambio = document.getElementById("clave");
-		    if(cambio.type == "password"){
-			cambio.type = "text";
-			$('.icon').removeClass('bi bi-eye-slash-fill').addClass('bi bi-eye-fill');
-		    }else{
-			cambio.type = "password";
-			$('.icon').removeClass('bi bi-eye-fill').addClass('bi bi-eye-slash-fill');
-		    }
-	        } 
+            function mostrarPassword() {
+                var cambio = document.getElementById("clave");
+                if (cambio.type == "password") {
+                    cambio.type = "text";
+                    $('.icon').removeClass('bi bi-eye-slash-fill').addClass('bi bi-eye-fill');
+                } else {
+                    cambio.type = "password";
+                    $('.icon').removeClass('bi bi-eye-fill').addClass('bi bi-eye-slash-fill');
+                }
+            }
             </script>
+
 </html>
