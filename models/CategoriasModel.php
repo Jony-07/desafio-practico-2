@@ -20,11 +20,13 @@ class CategoriasModel extends ModelPDO{
         $query = '';     // retornar todos
         if($id==''){
             $query="SELECT * FROM categoria WHERE estado_categoria='0'";
+            return $this->get_query($query);
         }
         else{
             $query="SELECT * FROM categoria WHERE id_categoria=:id_categoria AND estado_categoria='0'";
+            return $this->get_query($query,[":id_categoria"=>$id]);
         }
-        return $this->get_query($query,[":id_categoria"=>$id]);
+       
     }
     public function create($arreglo=array()){
         $query="INSERT INTO categoria(id_categoria, nombre_categoria) VALUES (:id_categoria, :nombre_categoria)";

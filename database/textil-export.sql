@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Jun 13, 2023 at 07:28 AM
--- Server version: 8.0.31
--- PHP Version: 8.0.26
+-- Servidor: 127.0.0.1:3306
+-- Tiempo de generación: 14-06-2023 a las 07:05:41
+-- Versión del servidor: 8.0.31
+-- Versión de PHP: 8.0.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,35 +18,36 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `textil-export`
+-- Base de datos: `textil-export`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categoria`
+-- Estructura de tabla para la tabla `categoria`
 --
 
 DROP TABLE IF EXISTS `categoria`;
 CREATE TABLE IF NOT EXISTS `categoria` (
   `id_categoria` char(2) COLLATE utf16_unicode_ci NOT NULL,
   `nombre_categoria` varchar(50) COLLATE utf16_unicode_ci NOT NULL,
-  `estado_categoria` int NOT NULL,
+  `estado_categoria` int NOT NULL DEFAULT '1',
   PRIMARY KEY (`id_categoria`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
 
 --
--- Dumping data for table `categoria`
+-- Volcado de datos para la tabla `categoria`
 --
 
 INSERT INTO `categoria` (`id_categoria`, `nombre_categoria`, `estado_categoria`) VALUES
 ('1', 'Fibras naturales', 1),
-('2', 'Fibras sintéticas', 1);
+('2', 'Fibras sintéticas', 1),
+('3', 'Modernas', 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cliente`
+-- Estructura de tabla para la tabla `cliente`
 --
 
 DROP TABLE IF EXISTS `cliente`;
@@ -68,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `cliente` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
 
 --
--- Dumping data for table `cliente`
+-- Volcado de datos para la tabla `cliente`
 --
 
 INSERT INTO `cliente` (`codigo_cliente`, `nombre`, `apellido`, `correo`, `clave`, `telefono`, `direccion`, `hash_active`, `id_tipo_usuario`, `verificado`, `id_estado`) VALUES
@@ -77,7 +78,7 @@ INSERT INTO `cliente` (`codigo_cliente`, `nombre`, `apellido`, `correo`, `clave`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `estado`
+-- Estructura de tabla para la tabla `estado`
 --
 
 DROP TABLE IF EXISTS `estado`;
@@ -88,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `estado` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
 
 --
--- Dumping data for table `estado`
+-- Volcado de datos para la tabla `estado`
 --
 
 INSERT INTO `estado` (`id_estado`, `nombre_estado`) VALUES
@@ -98,22 +99,34 @@ INSERT INTO `estado` (`id_estado`, `nombre_estado`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `producto`
+-- Estructura de tabla para la tabla `producto`
 --
 
 DROP TABLE IF EXISTS `producto`;
 CREATE TABLE IF NOT EXISTS `producto` (
-  `id_producto` char(8) COLLATE utf16_unicode_ci NOT NULL,
+  `codigo_producto` char(9) CHARACTER SET utf16 COLLATE utf16_unicode_ci NOT NULL,
+  `nombre_producto` varchar(75) COLLATE utf16_unicode_ci NOT NULL,
+  `descripcion` varchar(255) COLLATE utf16_unicode_ci NOT NULL,
+  `imagen` varchar(13) COLLATE utf16_unicode_ci NOT NULL,
+  `precio` float(10,2) NOT NULL,
+  `existencias` int NOT NULL,
   `id_categoria` char(2) COLLATE utf16_unicode_ci NOT NULL,
-  `estado` int NOT NULL,
-  PRIMARY KEY (`id_producto`),
+  `estado` int NOT NULL DEFAULT '1',
+  PRIMARY KEY (`codigo_producto`),
   KEY `producto_ibfk_2` (`id_categoria`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `producto`
+--
+
+INSERT INTO `producto` (`codigo_producto`, `nombre_producto`, `descripcion`, `imagen`, `precio`, `existencias`, `id_categoria`, `estado`) VALUES
+('PROD00001', 'Tela Natural', 'Tela de fibra natural', 'PROD00001.jpg', 5.00, 5, '1', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tipo_usuario`
+-- Estructura de tabla para la tabla `tipo_usuario`
 --
 
 DROP TABLE IF EXISTS `tipo_usuario`;
@@ -124,7 +137,7 @@ CREATE TABLE IF NOT EXISTS `tipo_usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
 
 --
--- Dumping data for table `tipo_usuario`
+-- Volcado de datos para la tabla `tipo_usuario`
 --
 
 INSERT INTO `tipo_usuario` (`id_tipo_usuario`, `nombre_tipo_usuario`) VALUES
@@ -134,7 +147,7 @@ INSERT INTO `tipo_usuario` (`id_tipo_usuario`, `nombre_tipo_usuario`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usuario`
+-- Estructura de tabla para la tabla `usuario`
 --
 
 DROP TABLE IF EXISTS `usuario`;
@@ -147,31 +160,34 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `id_tipo_usuario` int NOT NULL DEFAULT '1',
   `id_estado` int NOT NULL DEFAULT '1',
   `verificado` int NOT NULL DEFAULT '1',
+  `hash_active` varchar(255) COLLATE utf16_unicode_ci NOT NULL,
   PRIMARY KEY (`codigo_usuario`),
   KEY `usuario_ibfk_2` (`id_estado`),
   KEY `usuario_ibfk_3` (`id_tipo_usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_unicode_ci;
 
 --
--- Dumping data for table `usuario`
+-- Volcado de datos para la tabla `usuario`
 --
 
-INSERT INTO `usuario` (`codigo_usuario`, `nombre`, `telefono`, `correo`, `clave`, `id_tipo_usuario`, `id_estado`, `verificado`) VALUES
-('U005', 'Jony Morales', '7005-9988', 'jony25@gmail.com', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 1, 1, 1);
+INSERT INTO `usuario` (`codigo_usuario`, `nombre`, `telefono`, `correo`, `clave`, `id_tipo_usuario`, `id_estado`, `verificado`, `hash_active`) VALUES
+('U005', 'Jony Morales', '7005-9988', 'jony25@gmail.com', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 1, 1, 1, ''),
+('U234', 'Jdev', '7005-9989', 'jdev@gmail.com', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 1, 1, 1, '3416a75f4cea9109507cacd8e2f2aefc'),
+('U237', 'Jlopez', '7005-9988', 'jaylopez@gmail.com', 'ef797c8118f02dfb649607dd5d3f8c7623048c9c063d532cc95c5ed7a898a64f', 1, 1, 1, 'aff1621254f7c1be92f64550478c56e6');
 
 --
--- Constraints for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
--- Constraints for table `cliente`
+-- Filtros para la tabla `cliente`
 --
 ALTER TABLE `cliente`
   ADD CONSTRAINT `cliente_ibfk_3` FOREIGN KEY (`id_tipo_usuario`) REFERENCES `tipo_usuario` (`id_tipo_usuario`),
   ADD CONSTRAINT `clienteo_ibfk_2` FOREIGN KEY (`id_estado`) REFERENCES `estado` (`id_estado`);
 
 --
--- Constraints for table `usuario`
+-- Filtros para la tabla `usuario`
 --
 ALTER TABLE `usuario`
   ADD CONSTRAINT `usuario_ibfk_2` FOREIGN KEY (`id_estado`) REFERENCES `estado` (`id_estado`),

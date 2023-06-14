@@ -7,12 +7,13 @@ class EstadosModel extends ModelPDO{
         if($id==''){
             // retornar todos
             $query="SELECT * FROM estado";
+            return $this->get_query($query);
         }
         else{
             //Retorno por llave primaria
             $query= "SELECT * FROM estado WHERE id_estado=:id_estado";
+            return $this->get_query($query,[":id_estado"=>$id]);
         }
-        return $this->get_query($query,[":id_estado"=>$id]);
     }
     public function getDescontinuados($id=''){
       

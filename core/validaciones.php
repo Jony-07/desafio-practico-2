@@ -28,7 +28,7 @@
     }
     function esNickname($var)
     {
-        return preg_match('/^[a-zA-Z0-9óáéúíñÁÉÓÍÚÑ\-\_]+$/',$var);
+        return preg_match('/^[a-zA-Z0-9óáéúíñÁÉÓÍÚÑ\-\_ ]+$/',$var);
     }
     function esUsuario($var)
     {
@@ -44,7 +44,7 @@
     }
     function esTelefono($var)
     {
-        return preg_match('/^[267][0-9]{3}-[0-9]{4}$/',$var);
+        return preg_match('/^[267][0-9]{3}[-]?[0-9]{4}$/',$var);
     }
     function esCodigoEditorial($var)
     {

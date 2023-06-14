@@ -58,25 +58,15 @@
                                 <td></td>
                                 <td>
                                     <div class="form-group mx-sm-4 pt-3">
-                                        <label for="id_tipo_usuario" class="form-label">Tipo usuario</label>
-                                        <select class="form-select" name="id_tipo_usuario" id="id_tipo_usuario"
-                                            aria-label="Floating label select example">
-                                            <?php
-                                    foreach($tipo_usuarios as $tipo_usuario){
-                                        if($tipo_usuario['nombre_tipo_usuario']!='Cliente'){
-                                        if($tipo_usuario['nombre_tipo_usuario']==isset($usuario)?$usuario['nombre_tipo_usuario']:'')
-                                        {
-                                ?>
-                                            <option selected value="<?=$tipo_usuario['id_tipo_usuario']?>">
-                                                <?=$tipo_usuario['nombre_tipo_usuario']?></option>
-                                            <?php } else{ ?>
-                                            <option value="<?=$tipo_usuario['id_tipo_usuario']?>">
-                                                <?=$tipo_usuario['nombre_tipo_usuario']?></option>
-                                            <?php } }} ?>
-                                        </select>
-
+                                        <label for="correo" class="form-label">Correo</label>
+                                        <input type="text" class="form-control"
+                                            placeholder="Ingrese su Correo Electronico" name="correo"
+                                            value="<?=isset($usuario)?$usuario['correo']:''?>" id="correo">
                                     </div>
                                 </td>
+
+                                <input type="text" class="form-control" id="id_tipo_usuario" hidden placeholder="U123"
+                                    value="1" readonly name="id_tipo_usuario">
                             </tr>
                             <tr>
                                 <th scope="row"></th>
@@ -106,14 +96,7 @@
                             </tr>
                             <tr>
                                 <th scope="row"></th>
-                                <td>
-                                    <div class="form-group mx-sm-4 pt-3">
-                                        <label for="correo" class="form-label">Correo</label>
-                                        <input type="text" class="form-control"
-                                            placeholder="Ingrese su Correo Electronico" name="correo"
-                                            value="<?=isset($usuario)?$usuario['correo']:''?>" id="correo">
-                                    </div>
-                                </td>
+
                                 <td></td>
                                 <td>
                                     <!-- <div class="form-group mx-sm-4 pt-3">
