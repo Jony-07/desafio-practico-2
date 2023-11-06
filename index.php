@@ -10,6 +10,11 @@ include_once "./controllers/CategoriasController.php";
 include_once "./controllers/TipoUsuarioController.php";
 include_once "./controllers/CarritosController.php";
 include_once "./controllers/FacturasController.php";
+
+require __DIR__ . '/vendor/autoload.php';
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
 $router = new Routing();
 /*
 echo "Controlador: $router->controller";

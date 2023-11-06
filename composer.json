@@ -1,0 +1,21 @@
+{
+    "name": "jdev07/desafio-practico-2",
+    "description": "Just a php project",
+    "type": "project",
+    "license": "propietary",
+    "autoload": {
+        "psr-4": {
+            "Jdev07\\DesafioPractico2\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Jony Morales",
+            "email": "jony25lopezml@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "vlucas/phpdotenv": "^5.5"
+    }
+}

@@ -9,10 +9,10 @@
         {
             $var="";
             $this->url = explode("/", $_SERVER['REQUEST_URI']);
-            $this->controller = empty($this->url[2]) ? 'Index' : $this->url[2];
+            $this->controller = empty($this->url[3]) ? 'Index' : $this->url[3];
             $this->controller .= 'Controller';
-            $this->method = empty($this->url[3]) ? 'Index' : $this->url[3];
-            $this->param = empty($this->url[4]) ? $var : $this->url[4];
+            $this->method = empty($this->url[4]) ? 'Index' : $this->url[4];
+            $this->param = empty($this->url[5]) ? $var : $this->url[5];
         }
 
 

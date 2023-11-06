@@ -1,15 +1,19 @@
 <?php
 abstract class ModelPDO{
+    
 
-        private $db_host="localhost";
-        private $db_user="root";
-        private $db_pass="";
-        private $db_name="textil-export";
+        private $db_host;
+        private $db_user;
+        private $db_pass;
+        private $db_name;
         protected $conn;
 
         function __construct()
         {
-            
+            $this->db_host=$_ENV['DB_HOST'];
+            $this->db_user=$_ENV['DB_USER'];
+            $this->db_pass=$_ENV['DB_PASS'];
+            $this->db_name=$_ENV['DB_NAME'];
         }
 
 
